@@ -1,8 +1,10 @@
 const app = new Vue({
   el: '#app',
-  data:() => ({
-    handler: null,
-  }),
+  data() {
+    return {
+      handler: null,
+    }
+  },
   created() {
     this.handler = StripeCheckout.configure({
       key: 'pk_test_poofr0LLRyvDHae1Ox36OBLe',
@@ -20,13 +22,27 @@ const app = new Vue({
         currency: 'eur',
       })
     },
-    done(token) {
-      //CALL API
-
-      //WHEN DONE, CALL ORX PARTICIPATION
+    async makePayment(stripeToken) {
+      console.log(stripeToken)
+      try {
+        const response = await axios.post('http://localhost:3000/pay', {
+          stripeToken
+        })
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
     },
-    // close() {
-    //   this.handler.close()
-    // },
+    async orxParticipate() {
+      //MAKE ORX PARTICIPATE
+    },
+    async done(stripeToken) {
+      await makePayment(stripeToken) 
+      this.close()
+      await orxParticipate()
+    },
+    close() {
+      this.handler.close()
+    },
   }
 })
