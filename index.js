@@ -6,26 +6,27 @@ const app = new Vue({
   created() {
     this.handler = StripeCheckout.configure({
       key: 'pk_test_poofr0LLRyvDHae1Ox36OBLe',
-      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-      locale: 'auto',
-      token: this.getToken
+      image: 'https://orchextra-images-pt-tmp.s3-eu-west-1.amazonaws.com/ce3de53dcd0c92631fbbeeecc1fd7ba5',
+      locale: 'es',
+      zipCode: false,
+      token: this.done
     })
-  },
-  beforeDestroy() {
-    this.handler.close()
   },
   methods: {
     pay() {
-      console.log('pay')
-
       this.handler.open({
-        name: 'Gigiporra payment',
-        description: 'description gigiporra payment',
-        amount: 50
+        name: 'Participación',
+        amount: 300,
+        currency: 'eur',
       })
     },
-    getToken(token) {
-      console.log(token)
-    }
+    done(token) {
+      //CALL API
+
+      //WHEN DONE, CALL ORX PARTICIPATION
+    },
+    // close() {
+    //   this.handler.close()
+    // },
   }
 })

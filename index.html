@@ -7,6 +7,7 @@
   <title>Gigiporra Payments</title>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
 </head>
 <body>
   <div id="app">
@@ -14,20 +15,6 @@
       @click="pay"  
     >Pay participation</button>
   </div>
-
-    <!-- <form action="http://localhost:3000/pay" method="POST">
-        <script
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_live_UdIoryCQ9JNXvoR1diUAV9RO"
-            data-amount="300"
-            data-currency="eur"
-            data-name="Stripe.com"
-            data-description="Example charge"
-            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-            data-locale="auto"
-            data-zip-code="true">
-        </script>
-    </form> -->
 
   <script src="index.js"></script>
 </body>
