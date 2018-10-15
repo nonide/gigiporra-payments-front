@@ -17,13 +17,19 @@ const app = new Vue({
       image: LOGO_URL,
       locale: 'es',
       zipCode: false,
-      token: this.done
+      token: this.done,
+      closed: this.stopFullscreen
     })
   },
   methods: {
-    pay() {
+    startFullscreen() {
       window.top.postMessage({ type: 'startFullscreen' }, '*')
-
+    },
+    stopFullscreen() {
+      window.top.postMessage({ type: 'stopFullscreen' }, '*')
+    },
+    pay() {
+      this.startFullscreen()
       this.handler.open({
         name: 'Participación',
         amount: AMOUNT,
@@ -35,22 +41,15 @@ const app = new Vue({
         const response = await axios.post(`${API_URL}/pay`, {
           stripeToken: stripeToken.id
         })
-        console.log(response);
       } catch (error) {
         console.error(error);
       }
     },
-    async orxFinish() {
-      window.top.postMessage({ type: 'orchextraPromotoolEnd' }, '*')
-    },
     async done(stripeToken) {
       await this.makePayment(stripeToken) 
-      this.close()
-      await this.orxFinish()
-    },
-    close() {
       this.handler.close()
-      window.top.postMessage({ type: 'stopFullscreen' }, '*')
+      this.stopFullscreen()
+      window.top.postMessage({ type: 'orchextraPromotoolEnd' }, '*')
     },
   }
 })
