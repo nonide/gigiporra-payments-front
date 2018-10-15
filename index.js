@@ -22,6 +22,8 @@ const app = new Vue({
   },
   methods: {
     pay() {
+      window.top.postMessage({ type: 'startFullscreen' }, '*')
+
       this.handler.open({
         name: 'Participación',
         amount: AMOUNT,
@@ -29,7 +31,6 @@ const app = new Vue({
       })
     },
     async makePayment(stripeToken) {
-      console.log(stripeToken)
       try {
         const response = await axios.post(`${API_URL}/pay`, {
           stripeToken: stripeToken.id
@@ -49,6 +50,7 @@ const app = new Vue({
     },
     close() {
       this.handler.close()
+      window.top.postMessage({ type: 'stopFullscreen' }, '*')
     },
   }
 })
