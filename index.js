@@ -40,7 +40,7 @@ const app = new Vue({
       }
     },
     async orxFinish() {
-      //MAKE ORX PARTICIPATE
+      window.top.postMessage({ type: messageTypes.ORCHEXTRA_PROMOTOOL_END }, '*')
     },
     async done(stripeToken) {
       await this.makePayment(stripeToken) 
