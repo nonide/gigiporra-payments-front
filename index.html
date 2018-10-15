@@ -9,14 +9,31 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://checkout.stripe.com/checkout.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
 </head>
 <body>
-  <div id="app">
-    <button
-      @click="pay"  
-    >Pay participation</button>
-  </div>
+<div
+  id="app"
+>
+<section class="section payment-button">
+    <div class="container">
+      <a
+        class="button is-info"
+        @click="pay"
+      >
+        Pay your participation
+      </a>
+    </div>
+</section>
+</div>
 
-  <script src="index.js"></script>
+
+<style>
+  .payment-button {
+    text-align: center;
+  }
+</style>
+<script src="index.js"></script>
 </body>
 </html>

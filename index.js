@@ -26,20 +26,20 @@ const app = new Vue({
       console.log(stripeToken)
       try {
         const response = await axios.post('http://localhost:3000/pay', {
-          stripeToken
+          stripeToken: stripeToken.id
         })
         console.log(response);
       } catch (error) {
         console.error(error);
       }
     },
-    async orxParticipate() {
+    async orxFinish() {
       //MAKE ORX PARTICIPATE
     },
     async done(stripeToken) {
-      await makePayment(stripeToken) 
+      await this.makePayment(stripeToken) 
       this.close()
-      await orxParticipate()
+      await this.orxFinish()
     },
     close() {
       this.handler.close()
