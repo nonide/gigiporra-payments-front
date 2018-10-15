@@ -40,7 +40,7 @@ const app = new Vue({
       }
     },
     async orxFinish() {
-      window.top.postMessage({ type: messageTypes.ORCHEXTRA_PROMOTOOL_END }, '*')
+      window.top.postMessage({ type: 'orchextraPromotoolEnd' }, '*')
     },
     async done(stripeToken) {
       await this.makePayment(stripeToken) 
