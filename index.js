@@ -1,3 +1,9 @@
+const API_URL =  'https://gigiporra-payments.now.sh'
+const LOGO_URL = "https://orchextra-images-pt-tmp-dev.s3-eu-west-1.amazonaws.com/a524ca9bac5d24a1bbc3cbb6d3903d85"
+
+const PK_TOKEN = "pk_test_poofr0LLRyvDHae1Ox36OBLe"
+const AMOUNT = 300
+
 const app = new Vue({
   el: '#app',
   data() {
@@ -7,8 +13,8 @@ const app = new Vue({
   },
   created() {
     this.handler = StripeCheckout.configure({
-      key: 'pk_test_poofr0LLRyvDHae1Ox36OBLe',
-      image: 'https://orchextra-images-pt-tmp.s3-eu-west-1.amazonaws.com/ce3de53dcd0c92631fbbeeecc1fd7ba5',
+      key: PK_TOKEN,
+      image: LOGO_URL,
       locale: 'es',
       zipCode: false,
       token: this.done
@@ -18,14 +24,14 @@ const app = new Vue({
     pay() {
       this.handler.open({
         name: 'Participación',
-        amount: 300,
+        amount: AMOUNT,
         currency: 'eur',
       })
     },
     async makePayment(stripeToken) {
       console.log(stripeToken)
       try {
-        const response = await axios.post('http://localhost:3000/pay', {
+        const response = await axios.post(`${API_URL}/pay`, {
           stripeToken: stripeToken.id
         })
         console.log(response);
