@@ -48,7 +48,6 @@ const app = new Vue({
     async done(stripeToken) {
       await this.makePayment(stripeToken) 
       this.handler.close()
-      this.stopFullscreen()
       window.top.postMessage({ type: 'orchextraPromotoolEnd' }, '*')
     },
   }
